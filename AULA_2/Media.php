@@ -1,10 +1,10 @@
 <?php
 $nome = readline("Digite o nome do aluno: ");
 // Lê a primeira nota
-$nota1 = (float)readline("Digite a primeira nota: ");
+$nota1 = (float) readline("Digite a primeira nota: ");
 
 // Lê a segunda nota
-$nota2 = (float)readline("Digite a segunda nota: ");
+$nota2 = (float) readline("Digite a segunda nota: ");
 
 // Calcula a média
 $media = ($nota1 + $nota2) / 2;
@@ -23,3 +23,4 @@ if (strtolower(trim($nome)) === "enzo enrico") {
         echo "Reprovado!\n";
     }
 }
+?>
