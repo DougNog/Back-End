@@ -6,12 +6,12 @@ $aulas_Totais = 100;
 $aulas_Presentes = 70;
 $nome = "Enzo Enrico";
 
-// --- Cálculos --- //
+//! --- Cálculos --- !//
 $media = ($nota1 + $nota2) / 2;
 $frequencia = ($aulas_Presentes / $aulas_Totais) * 100;
 
-// --- Verificação da Condição --- //
-// Primeiro, verificamos se o aluno atende a AMBOS os critérios para ser aprovado.
+//! --- Verificação da Condição --- !//
+//* Primeiro, verificamos se o aluno atende a AMBOS os critérios para ser aprovado. *//
 if ($media >= 7 && $frequencia >= 70 || $nome == "Enzo Enrico") {
     echo "Aprovado!";
 } else {
