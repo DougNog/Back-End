@@ -12,21 +12,20 @@ for ($i = 1; $i <= 5; $i++) {
     switch ($opcao) {
         case 1:
             echo "Olá!\n";
-            break; // Sai do switch, continua o loop for
+            break; 
         case 2:
             echo "Data Atual: " . date("d/m/Y H:i:s") . "\n";
-            break; // Sai do switch, continua o loop for
+            break;
         case 3:
             echo "Saindo do programa...\n";
-            // 'break 2;' sai tanto do switch quanto do loop for
-            exit; // 'exit;' termina a execução do script PHP imediatamente
-            break; // Este break é redundante após exit;
+            exit; 
+            break; 
         default:
             echo "Opção inválida. Por favor, escolha 1, 2 ou 3.\n";
-            break; // Sai do switch, continua o loop for
+            break; 
     }
 }
 
-echo "\nFim das repetições do menu.\n"; // Esta linha só será executada se o loop for terminar naturalmente (após 5 repetições) e o usuário não escolher '3'.
+echo "\nFim das repetições do menu.\n";
 
 ?>
