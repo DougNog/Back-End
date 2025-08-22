@@ -24,6 +24,19 @@ class Cachorro
         $this->castrado = $castrado;
         $this->sexo = $sexo;
     }
+
+//! Exericio S: 
+//!Crie um método para a classe 'Cachorro' chamado de 'latir', no qual exibe uma mensagem "O cachorro $nome está latindo!"
+public function latir() {
+    echo "O Cachorro $this->nome Está Latindo! \n";
+}
+
+//! Exercicio 6:
+//! Crie outro método para a classe 'Cachorro' chamado de 'marcar território', no qual exibe uma mensagem "O cachorro $nome da raça $raca está marcando território*.
+public function MarcarTerritorio() {
+    echo "O Cachorro $this->nome da raça $this->raca está marcando território \n";
+}
+
 }
 
 $cachorro1 = new Cachorro("Rex", 5, "Labrador", true, "Macho");
