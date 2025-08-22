@@ -17,13 +17,13 @@ $bolacha1->categoria = "Doces";
 $bolacha1->fornecedor = "Nestle";
 $bolacha1->qtde_estoque = "150";
 
-$Bebida1 = new Bebidas();
+$Bebida1 = new Produtos();
 $Bebida1->nome = "Coca-Cola";
 $Bebida1->categoria = "Bebidas";
 $Bebida1->fornecedor = "Coca-Cola Company";
 $Bebida1->qtde_estoque = "300";
 
-$sorvete1 = new Sorvetes();
+$sorvete1 = new Produtos();
 $sorvete1->nome = "Napolitano";
 $sorvete1->categoria = "Sorvetes";
 $sorvete1->fornecedor = "Kibon";
