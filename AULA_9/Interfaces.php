@@ -64,4 +64,33 @@ class Circulo {
 $meuCirculo = new Circulo(5);
 echo "A área do círculo é: " . $meuCirculo->calcularArea();
 
+//* crie a classe pentagono e calcule a area do mesmo 
+//* crie a classe hexagono, e calcule a area do mesmo 
+
+class Pentagono implements forma {
+    private $lado;
+    private $apotema;
+
+    public function __construct($lado, $apotema) {
+        $this->lado = $lado;
+        $this->apotema = $apotema;
+    }
+
+    public function calcularArea() {
+        return (5 * $this->lado * $this->apotema) / 2;
+    }
+}
+
+class Hexagono implements forma {
+    private $lado;
+
+    public function __construct($lado) {
+        $this->lado = $lado;
+    }
+
+    public function calcularArea() {
+        return (3 * sqrt(3) * ($this->lado * $this->lado)) / 2;
+    }
+}
+
 ?>
