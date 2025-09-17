@@ -57,3 +57,4 @@ class Pessoa {
 $aluno1 = new Pessoa ("Douglas Nogueira", "999.999.999-99", "(99) 99999-9999", 20, "emial@gmail.com", "1234");
 
 echo $aluno1->getNome(); 
+
