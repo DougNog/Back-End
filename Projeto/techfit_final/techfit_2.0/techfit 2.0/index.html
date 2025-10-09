@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechFit • Sistema de Gestão</title>
+   <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">TF</div>
+      <div class="titles">
+        <h1>TechFit</h1>
+        <small>Gestão integrada de academia</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <button class="tablink active" data-tab="agendamento">Agendamento</button>
+      <button class="tablink" data-tab="acesso">Controle de Acesso</button>
+      <button class="tablink" data-tab="comunicacao">Comunicação</button>
+      <button class="tablink" data-tab="avaliacao">Avaliação Física</button>
+      <button class="tablink" data-tab="painel">Painel Administrativo</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- AGENDAMENTO -->
+    <section id="agendamento" class="tab active">
+      <div class="grid two">
+        <div class="card">
+          <h2>Agendar Aula</h2>
+          <form id="formAgendamento">
+            <label>Membro
+              <select id="ag_membro"></select>
+            </label>
+            <label>Modalidade
+              <select id="ag_modalidade"></select>
+            </label>
+            <label>Turma
+              <select id="ag_turma"></select>
+            </label>
+            <label>Data
+              <input type="date" id="ag_data" required />
+            </label>
+            <label>Horário
+              <input type="time" id="ag_hora" required />
+            </label>
+            <button type="submit">Reservar</button>
+          </form>
+          <div class="hint">Capacidade e lista de espera são calculadas automaticamente.</div>
+        </div>
+
+        <div class="card">
+          <h2>Minhas Reservas</h2>
+          <div id="listaReservas" class="table"></div>
+          <div class="actions">
+            <button id="btnCancelarReserva">Cancelar Reserva</button>
+            <button id="btnRelOcupacao">Relatório de Ocupação</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Relatório de Ocupação por Turma</h2>
+        <div id="ocupacao" class="table"></div>
+      </div>
+    </section>
+
+    <!-- CONTROLE DE ACESSO -->
+    <section id="acesso" class="tab">
+      <div class="grid two">
+        <div class="card">
+          <h2>Registrar Acesso</h2>
+          <form id="formAcesso">
+            <label>Membro
+              <select id="ac_membro"></select>
+            </label>
+            <label>Método
+              <select id="ac_metodo">
+                <option>QR Code</option>
+                <option>Biometria</option>
+                <option>Cartão</option>
+              </select>
+            </label>
+            <button type="submit">Registrar Entrada</button>
+          </form>
+          <div class="hint">Simulação client-side (sem hardware). Logs ficam em “Diário de Acesso”.</div>
+        </div>
+
+        <div class="card">
+          <h2>Diário de Acesso</h2>
+          <div id="listaAcessos" class="table"></div>
+          <div class="actions">
+            <button id="btnExportAcessos">Exportar CSV</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMUNICAÇÃO -->
+    <section id="comunicacao" class="tab">
+      <div class="grid two">
+        <div class="card">
+          <h2>Enviar Mensagem</h2>
+          <form id="formMensagem">
+            <label>Título
+              <input id="msg_titulo" placeholder="Promoção, aviso, evento..." required />
+            </label>
+            <label>Mensagem
+              <textarea id="msg_corpo" rows="5" placeholder="Escreva o conteúdo..." required></textarea>
+            </label>
+            <fieldset class="seg">
+              <legend>Segmentação</legend>
+              <label><input type="checkbox" class="seg_chk" value="musculacao" checked/> Musculação</label>
+              <label><input type="checkbox" class="seg_chk" value="yoga" /> Yoga</label>
+              <label><input type="checkbox" class="seg_chk" value="spinning" /> Spinning</label>
+              <label><input type="checkbox" class="seg_chk" value="cross" /> Cross</label>
+              <label><input type="checkbox" class="seg_chk" value="alta-frequencia" /> Alta frequência (&gt;12x/mês)</label>
+            </fieldset>
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2>Mensagens Enviadas</h2>
+          <div id="listaMensagens" class="table"></div>
+          <div class="actions">
+            <button id="btnNovaCampanha">Duplicar como nova campanha</button>
+            <button id="btnRemoverCampanha">Excluir selecionada</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Suporte / Tickets</h2>
+        <div class="grid two">
+          <div>
+            <form id="formTicket">
+              <label>Membro
+                <select id="tk_membro"></select>
+              </label>
+              <label>Assunto
+                <input id="tk_assunto" placeholder="Dúvida, sugestão, erro..." required />
+              </label>
+              <label>Mensagem
+                <textarea id="tk_mensagem" rows="4" required></textarea>
+              </label>
+              <button type="submit">Abrir Ticket</button>
+            </form>
+          </div>
+          <div>
+            <div id="listaTickets" class="table"></div>
+            <div class="actions">
+              <button id="btnResponderTicket">Responder</button>
+              <button id="btnFecharTicket">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVALIAÇÃO FÍSICA -->
+    <section id="avaliacao" class="tab">
+      <div class="grid two">
+        <div class="card">
+          <h2>Nova Avaliação</h2>
+          <form id="formAvaliacao">
+            <label>Membro
+              <select id="av_membro"></select>
+            </label>
+            <label>Peso (kg)
+              <input type="number" step="0.1" id="av_peso" required />
+            </label>
+            <label>Altura (cm)
+              <input type="number" id="av_altura" required />
+            </label>
+            <label>% Gordura
+              <input type="number" step="0.1" id="av_gordura" required />
+            </label>
+            <label>Cintura (cm)
+              <input type="number" step="0.1" id="av_cintura" required />
+            </label>
+            <label>Observações
+              <textarea id="av_obs" rows="3"></textarea>
+            </label>
+            <button type="submit">Salvar Avaliação</button>
+          </form>
+          <div class="hint">Alertas: próximo check-up em 60 dias.</div>
+        </div>
+
+        <div class="card">
+          <h2>Histórico & Evolução</h2>
+          <div class="flex">
+            <label>Selecionar Membro
+              <select id="av_sel_membro"></select>
+            </label>
+            <button id="btnGerarGrafico">Gerar Gráfico</button>
+          </div>
+          <div id="listaAvaliacoes" class="table"></div>
+          <div class="chart-wrap">
+            <svg id="grafico" viewBox="0 0 600 200" preserveAspectRatio="none"></svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAINEL ADMINISTRATIVO -->
+    <section id="painel" class="tab">
+      <div class="grid three">
+        <div class="card">
+          <h2>Membros</h2>
+          <form id="formMembro" class="inline">
+            <input id="mb_nome" placeholder="Nome" required />
+            <input id="mb_email" placeholder="Email" required />
+            <select id="mb_modalidade">
+              <option>musculacao</option>
+              <option>yoga</option>
+              <option>spinning</option>
+              <option>cross</option>
+            </select>
+            <button type="submit">Adicionar</button>
+          </form>
+          <div id="listaMembros" class="table"></div>
+          <div class="actions">
+            <button id="btnRemoverMembro">Remover</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Modalidades & Turmas</h2>
+          <form id="formTurma" class="inline">
+            <input id="tm_nome" placeholder="Nome da Turma" required />
+            <select id="tm_modalidade">
+              <option>musculacao</option>
+              <option>yoga</option>
+              <option>spinning</option>
+              <option>cross</option>
+            </select>
+            <input id="tm_capacidade" placeholder="Capacidade" type="number" min="1" value="20" />
+            <button type="submit">Criar Turma</button>
+          </form>
+          <div id="listaTurmas" class="table"></div>
+          <div class="actions">
+            <button id="btnRemoverTurma">Remover</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Relatórios</h2>
+          <div class="report">
+            <button id="btnRelatorioFrequencia">Frequência por período</button>
+            <button id="btnRelatorioFinanceiro">Resumo financeiro (simulado)</button>
+          </div>
+          <div id="areaRelatorios" class="table"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 TechFit </p>
+  </footer>
+
+  <template id="rowTemplate">
+    <div class="row">
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+
+  <!-- Script para permissões -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const role = localStorage.getItem("role");
+
+      if (role === "user") {
+        document.querySelector("button[data-tab='acesso']").style.display = "none";
+        document.querySelector("button[data-tab='comunicacao']").style.display = "none";
+        document.querySelector("button[data-tab='painel']").style.display = "none";
+
+        document.getElementById("acesso").style.display = "none";
+        document.getElementById("comunicacao").style.display = "none";
+        document.getElementById("painel").style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechFit • Bem-vindo</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(to right, #5f9ea0, #20b2aa);
+      color: #fff;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+    }
+    header .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+      font-weight: 900;
+      font-size: 32px;
+      margin: 0 auto 20px;
+    }
+    header h1 { margin: 0; font-size: 32px; }
+    header p { margin-top: 8px; font-size: 18px; opacity: 0.9; }
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .card {
+      background: #fff;
+      color: #1f2937;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 6px 24px rgba(15,23,42,.15);
+      text-align: center;
+    }
+    .card h2 { margin-top: 0; }
+    .cta {
+      display: block;
+      margin: 40px auto;
+      padding: 14px 24px;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      width: fit-content;
+    }
+    .cta:hover { filter: brightness(1.1); }
+    footer {
+      text-align: center;
+      padding: 30px 10px;
+      color: #e0f2f1;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">TF</div>
+    <h1>Bem-vindo à TechFit</h1>
+    <p>Sua academia com gestão integrada, moderna e digital</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Agendamento Online</h2>
+      <p>Reserve suas aulas de forma simples e rápida, com controle de capacidade em tempo real.</p>
+    </div>
+    <div class="card">
+      <h2>Acesso Inteligente</h2>
+      <p>Entre na academia usando QR Code, biometria ou cartão, sem filas e com total segurança.</p>
+    </div>
+    <div class="card">
+      <h2>Comunicação Direta</h2>
+      <p>Receba avisos, promoções e eventos da academia diretamente na plataforma.</p>
+    </div>
+    <div class="card">
+      <h2>Avaliação & Evolução</h2>
+      <p>Acompanhe suas medições e evolução física em gráficos fáceis de entender.</p>
+    </div>
+  </main>
+
+  <a href="login.html" class="cta">Entrar no Sistema</a>
+
+  <footer>
+    © 2025 TechFit 
+  </footer>
+</body>
+</html>
