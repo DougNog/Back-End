@@ -13,7 +13,11 @@ class Aluno_DAO
         return $this->alunos;
     }
 
-    public function atualizar_aluno(){
+    public function atualizar_aluno($id, $novoNome, $novoCurso){
+        if (isset($this->alunos[$id])) {
+            $this->alunos[$id]->setNome($novoNome);
+            $this->alunos[$id]->setCurso($novoCurso);
+        }
     }
 
     public function excluir_aluno($id){
