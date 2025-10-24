@@ -1,16 +1,16 @@
 <?php 
 
         require_once "CRUD.php";
-        require_once "AlunoDAO.php";
+        require_once "Aluno_DAO.php";
     // Objeto da classe 
     $dao = new Aluno_DAO();
 
     // Create
-    $dao -> cirar_aluno( new Aluno(1, "Eduardo", "TADS"));
+    $dao -> criar_aluno( new Aluno(1, "Eduardo", "TADS"));
 
-    $dao -> cirar_aluno( new Aluno(2, "Marcelo", "Medicina"));
+    $dao -> criar_aluno( new Aluno(2, "Marcelo", "Medicina"));
 
-    $dao -> cirar_aluno( new Aluno(3, "Gabriel", "Engenharia"));
+    $dao -> criar_aluno( new Aluno(3, "Gabriel", "Engenharia"));
 
 
     //!Crie mais 6 objetos obedescendo a seguinte lista:
@@ -22,17 +22,17 @@
     //*   8 - Jao - Professor
     //*   9 - Bernardo - Streamer
 
-    $dao -> cirar_aluno( new Aluno(4, "Aurora", "Arquitetura"));
+    $dao -> criar_aluno( new Aluno(4, "Aurora", "Arquitetura"));
 
-    $dao -> cirar_aluno( new Aluno(5, "Oliver", "Director"));
+    $dao -> criar_aluno( new Aluno(5, "Oliver", "Director"));
 
-    $dao -> cirar_aluno( new Aluno(6, "Amanda", "Lutadora"));
+    $dao -> criar_aluno( new Aluno(6, "Amanda", "Lutadora"));
 
-    $dao -> cirar_aluno( new Aluno(7, "Gleyse", "Engenharia"));
+    $dao -> criar_aluno( new Aluno(7, "Gleyse", "Engenharia"));
 
-    $dao -> cirar_aluno( new Aluno(8, "Jao", "Professor"));
+    $dao -> criar_aluno( new Aluno(8, "Jao", "Professor"));
 
-    $dao -> cirar_aluno( new Aluno(9, "Bernardo", "Streamer"));
+    $dao -> criar_aluno( new Aluno(9, "Bernardo", "Streamer"));
 
 
     //READ
