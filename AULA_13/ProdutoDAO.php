@@ -7,7 +7,6 @@
 
 
 
-
 require_once 'Produto.php'; 
 
 class ProdutoDAO { // DAO = "Data Access Object"
