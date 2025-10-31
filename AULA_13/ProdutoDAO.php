@@ -1,6 +1,6 @@
 <?php
 
-// // Crie uma classe 'Produtos' com os atributos: código, nome e preço.
+// Crie uma classe 'Produtos' com os atributos: código, nome e preço.
 // Em seguida, crie a classe ProdutoDAO para a utilização dos métodos CRUD.
 // Por fim, desenvolva um arquivo index.php para testar a criação e manipulação dos objetos.
 // Implemente também a persistência de dados utilizando o arquivo produtos.json.
