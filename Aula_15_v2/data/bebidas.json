@@ -1,0 +1,30 @@
+{
+    "Laranja": {
+        "nome": "Laranja",
+        "categoria": "Suco",
+        "volume": "300ml",
+        "valor": "10",
+        "qtde": "25"
+    },
+    "Maracuj\u00e1": {
+        "nome": "Maracuj\u00e1",
+        "categoria": "Suco",
+        "volume": "300ml",
+        "valor": "15",
+        "qtde": "20"
+    },
+    "Vodka Smirnoff": {
+        "nome": "Vodka Smirnoff",
+        "categoria": "Destilado",
+        "volume": "500ml",
+        "valor": "25",
+        "qtde": "30"
+    },
+    "crystal": {
+        "nome": "crystal",
+        "categoria": "\u00c1gua",
+        "volume": "350ml",
+        "valor": "9",
+        "qtde": "35"
+    }
+}
