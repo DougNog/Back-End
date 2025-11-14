@@ -26,5 +26,12 @@
         "volume": "350ml",
         "valor": "9",
         "qtde": "35"
+    },
+    "Metanol": {
+        "nome": "Metanol",
+        "categoria": "Destilado",
+        "volume": "1000ml",
+        "valor": "15",
+        "qtde": "30"
     }
 }
