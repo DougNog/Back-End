@@ -1,15 +1,6 @@
 <?php
-
-namespace Aula_16;
-
-use Aula_16\Bebidas as Aula_16Bebidas;
-use Bebidas;
-use PDO;
-
-
-require_once 'Bebidas.php';
+require_once 'Bebida.php';
 require_once 'Connection.php';
-
 
 class BebidaDAO {
     private $conn;
@@ -32,7 +23,7 @@ class BebidaDAO {
     
 
     // CREATE
-    public function criarBebida(Aula_16Bebidas $bebida) {
+    public function criarBebida(Bebida $bebida) {
         $stmt = $this->conn->prepare("
             INSERT INTO bebidas (nome, categoria, volume, valor, qtde)
             VALUES (:nome, :categoria, :volume, :valor, :qtde)
@@ -51,7 +42,7 @@ class BebidaDAO {
         $stmt = $this->conn->query("SELECT * FROM bebidas ORDER BY nome");
         $result = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $result[] = new Aula_16Bebidas(
+            $result[] = new Bebida(
                 $row['nome'],
                 $row['categoria'],
                 $row['volume'],
@@ -91,7 +82,7 @@ class BebidaDAO {
         $stmt->execute([':nome' => $nome]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($row) {
-            return new Aula_16Bebidas(
+            return new Bebida(
                 $row['nome'],
                 $row['categoria'],
                 $row['volume'],
