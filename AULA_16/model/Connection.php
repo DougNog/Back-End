@@ -14,9 +14,9 @@ class Connection
         if (!self::$instance) {
             try {
                 $host = 'localhost';
-                $dbname = 'projeto_bebidas';
+                $dbname = '';
                 $user = 'root';
-                $pass = '1234';
+                $pass = 'senaisp';
 
                 self::$instance = new PDO("mysql:host=$host; charset=utf8", $user, $pass);
 
