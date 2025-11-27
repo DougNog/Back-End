@@ -1,173 +1,163 @@
 <?php
+require_once __DIR__ . '/../controller/BebidaController.php';
 
-namespace Aula_16;
-
-require_once __DIR__ . '\..\controller\BebidaController.php';
 $controller = new BebidaController();
+$acao = $_POST['acao'] ?? '';
+$editarBebida = null;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $acao = $_POST['acao'] ?? null;
-    if ($acao == 'criar') {
+// --- Processamento das ações ---
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // CRIAR nova bebida
+    if ($acao === 'criar') {
         $controller->criar(
-            $_POST['nome'],
-            $_POST['categoria'],
-            $_POST['volume'],
-            $_POST['valor'],
-            $_POST['qtde']
+            trim($_POST['nome']),
+            trim($_POST['categoria']),
+            trim($_POST['volume']),
+            (float) $_POST['valor'],
+            (int) $_POST['qtde']
         );
-    } elseif ($acao === 'deletar') {
-        $controller->excluir($_POST['nome']);
-    } elseif ($acao === 'editar') {
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
+    }
+
+    // DELETAR bebida existente
+    if ($acao === 'deletar') {
+        $controller->deletar(trim($_POST['nome']));
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
+    }
+
+    // ENTRAR NO MODO DE EDIÇÃO
+    if ($acao === 'editar') {
+        $editarBebida = $controller->buscarPorNome(trim($_POST['nome']));
+    }
+
+    // ATUALIZAR bebida existente
+    if ($acao === 'atualizar') {
         $controller->atualizar(
-            $_POST['nome'],
-            $_POST['novoNome'],
-            $_POST['novaCategoria'],
-            $_POST['novoVolume'],
-            $_POST['novoValor'],
-            $_POST['novaQtde']
+            trim($_POST['nome_original']),
+            trim($_POST['nome']),
+            trim($_POST['categoria']),
+            trim($_POST['volume']),
+            (float) $_POST['valor'],
+            (int) $_POST['qtde']
         );
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
     }
 }
+
+// LER bebidas cadastradas
+$lista = $controller->ler();
 ?>
 
 <!DOCTYPE html>
-<html lang="UTf-8">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Barzin do Zézin</title>
+    <title>Gerenciamento de Bebidas</title>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
-    <main>
-        <h1>Formulário cadastro de bebidas</h1>
-        <form action="" method="POST">
-            <input type="hidden" name="acao" value="criar">
-            <label for="">Nome:</label>
-            <input type="text" name="nome" required>
-            <label for="cat">Categoria:</label>
-            <select name="categoria" id="cat" required>
-                <option value="">Selecione uma categoria</option>
-                <option value="cerveja">Cerveja</option>
-                <option value="vinho">Vinho</option>
-                <option value="destilado">Destilado</option>
-                <option value="refrigerante">Refrigerante</option>
-                <option value="suco">Suco</option>
-                <option value="agua">Água</option>
-            </select>
+<h1>Gerenciamento de bebidas</h1>
+<br>
+<hr>
 
-            <label for="">Volume:</label>
-            <input type="number" name="volume" step="0.01" required>
+<?php if ($editarBebida): ?>
+    <!-- Formulário de atualização -->
+    <form method="POST">
+        <input type="hidden" name="acao" value="atualizar">
+        <input type="hidden" name="nome_original" value="<?= htmlspecialchars($editarBebida->getNome()) ?>">
 
-            <label for="">Valor:</label>
-            <input type="number" name="valor" step="0.01" required>
+        <input type="text" name="nome" placeholder="Nome da bebida:" required value="<?= htmlspecialchars($editarBebida->getNome()) ?>">
 
-            <label for="">Quantidade:</label>
-            <input type="number" name="qtde" required>
-            <button type="submit">Cadastrar</button>
-        </form>
+        <select name="categoria" required>
+            <option value="">Selecione a categoria</option>
+            <option value="Refrigerante" <?= $editarBebida->getCategoria() === 'Refrigerante' ? 'selected' : '' ?>>Refrigerante</option>
+            <option value="Cerveja" <?= $editarBebida->getCategoria() === 'Cerveja' ? 'selected' : '' ?>>Cerveja</option>
+            <option value="Vinho" <?= $editarBebida->getCategoria() === 'Vinho' ? 'selected' : '' ?>>Vinho</option>
+            <option value="Destilado" <?= $editarBebida->getCategoria() === 'Destilado' ? 'selected' : '' ?>>Destilado</option>
+            <option value="Água" <?= $editarBebida->getCategoria() === 'Água' ? 'selected' : '' ?>>Água</option>
+            <option value="Suco" <?= $editarBebida->getCategoria() === 'Suco' ? 'selected' : '' ?>>Suco</option>
+            <option value="Energético" <?= $editarBebida->getCategoria() === 'Energético' ? 'selected' : '' ?>>Energético</option>
+        </select>
 
-        <div class="ler">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Volume</th>
-                        <th>Valor</th>
-                        <th>Quantidade</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $bebidas = $controller->ler();
-                    foreach ($bebidas as $bebida) {
-                        echo "<tr>";
-                        echo "<td>{$bebida->getNome()}</td>";
-                        echo "<td>{$bebida->getCategoria()}</td>";
-                        echo "<td>{$bebida->getVolume()}</td>";
-                        echo "<td>{$bebida->getValor()}</td>";
-                        echo "<td>{$bebida->getQtde()}</td>";
-                        echo "<td>
-                                <button onclick=\"abrirModal('{$bebida->getNome()}', '{$bebida->getCategoria()}', {$bebida->getVolume()}, {$bebida->getValor()}, {$bebida->getQtde()})\" class=\"btn-editar\">Editar</button>
-                                <form action=\"\" method=\"POST\" style=\"display:inline;\">
-                                    <input type=\"hidden\" name=\"acao\" value=\"deletar\">
-                                    <input type=\"hidden\" name=\"nome\" value=\"{$bebida->getNome()}\">
-                                    <button type=\"submit\" class=\"btn-deletar\">Deletar</button>
-                                </form></td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                    <form action="" method="POST">
-                     <input type="hidden" name="acao" value="deletar">
+        <input type="text" name="volume" placeholder="Volume (ex: 300ml):" required value="<?= htmlspecialchars($editarBebida->getVolume()) ?>">
+        <input type="number" name="valor" step="0.01" placeholder="Valor em Reais (R$):" required value="<?= htmlspecialchars($editarBebida->getValor()) ?>">
+        <input type="number" name="qtde" placeholder="Quantidade em estoque:" required value="<?= htmlspecialchars($editarBebida->getQtde()) ?>">
+
+        <button type="submit">Atualizar</button>
+    </form>
+
+<?php else: ?>
+    <!-- Formulário de criação -->
+    <form method="POST">
+        <input type="hidden" name="acao" value="criar">
+        <input type="text" name="nome" placeholder="Nome da bebida:" required>
+        <select name="categoria" required>
+            <option value="">Selecione a categoria</option>
+            <option value="Refrigerante">Refrigerante</option>
+            <option value="Cerveja">Cerveja</option>
+            <option value="Vinho">Vinho</option>
+            <option value="Destilado">Destilado</option>
+            <option value="Água">Água</option>
+            <option value="Suco">Suco</option>
+            <option value="Energético">Energético</option>
+        </select>
+        <input type="text" name="volume" placeholder="Volume (ex: 300ml):" required>
+        <input type="number" name="valor" step="0.01" placeholder="Valor em Reais (R$):" required>
+        <input type="number" name="qtde" placeholder="Quantidade em estoque:" required>
+        <button type="submit">Cadastrar</button>
+    </form>
+<?php endif; ?>
+
+<hr>
+<br><br>
+
+<h2>Lista de Bebidas</h2>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th>Nome</th>
+        <th>Categoria</th>
+        <th>Volume</th>
+        <th>Valor (R$)</th>
+        <th>Quantidade</th>
+        <th>Ações</th>
+    </tr>
+
+    <?php if (!empty($lista)): ?>
+        <?php foreach ($lista as $bebida): ?>
+            <tr>
+                <td><?= htmlspecialchars($bebida->getNome()) ?></td>
+                <td><?= htmlspecialchars($bebida->getCategoria()) ?></td>
+                <td><?= htmlspecialchars($bebida->getVolume()) ?></td>
+                <td><?= number_format($bebida->getValor(), 2, ',', '.') ?></td>
+                <td><?= htmlspecialchars($bebida->getQtde()) ?></td>
+                <td>
+                    <!-- Botão Editar -->
+                    <form method="post" style="display:inline;">
+                        <input type="hidden" name="acao" value="editar">
+                        <input type="hidden" name="nome" value="<?= htmlspecialchars($bebida->getNome()) ?>">
+                        <input type="submit" value="Editar">
                     </form>
-                <tbody>
-                </tbody>
-            </table>
-    </main>
 
-    <!-- Modal de Edição -->
-    <div id="modalEditar" class="modal">
-        <div class="modal-content">
-            <span class="fechar">&times;</span>
-            <h2>Editar Bebida</h2>
-            <form action="" method="POST" id="formEditar">
-                <input type="hidden" name="acao" value="editar">
-                <input type="hidden" name="nome" id="nome_original">
-                
-                <label for="nome_edit">Nome:</label>
-                <input type="text" name="novoNome" id="nome_edit" required>
-                
-                <label for="categoria_edit">Categoria:</label>
-                <select name="novaCategoria" id="categoria_edit" required>
-                    <option value="">Selecione uma categoria</option>
-                    <option value="cerveja">Cerveja</option>
-                    <option value="vinho">Vinho</option>
-                    <option value="destilado">Destilado</option>
-                    <option value="refrigerante">Refrigerante</option>
-                    <option value="suco">Suco</option>
-                    <option value="agua">Água</option>
-                </select>
+                    <!-- Botão Deletar -->
+                    <form method="post" style="display:inline;">
+                        <input type="hidden" name="acao" value="deletar">
+                        <input type="hidden" name="nome" value="<?= htmlspecialchars($bebida->getNome()) ?>">
+                        <input type="submit" value="Deletar" onclick="return confirm('Tem certeza que deseja deletar esta bebida?');">
+                    </form>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <tr><td colspan="6">Nenhuma bebida cadastrada.</td></tr>
+    <?php endif; ?>
+</table>
 
-                <label for="volume_edit">Volume:</label>
-                <input type="number" name="novoVolume" id="volume_edit" step="0.01" required>
-
-                <label for="valor_edit">Valor:</label>
-                <input type="number" name="novoValor" id="valor_edit" step="0.01" required>
-
-                <label for="qtde_edit">Quantidade:</label>
-                <input type="number" name="novaQtde" id="qtde_edit" required>
-                
-                <button type="submit">Salvar Alterações</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // Função para abrir o modal
-        function abrirModal(nome, categoria, volume, valor, qtde) {
-            document.getElementById('modalEditar').style.display = 'block';
-            document.getElementById('nome_original').value = nome;
-            document.getElementById('nome_edit').value = nome;
-            document.getElementById('categoria_edit').value = categoria;
-            document.getElementById('volume_edit').value = volume;
-            document.getElementById('valor_edit').value = valor;
-            document.getElementById('qtde_edit').value = qtde;
-        }
-
-        // Fechar o modal quando clicar no X
-        document.querySelector('.fechar').onclick = function() {
-            document.getElementById('modalEditar').style.display = 'none';
-        }
-
-        // Fechar o modal quando clicar fora dele
-        window.onclick = function(event) {
-            if (event.target == document.getElementById('modalEditar')) {
-                document.getElementById('modalEditar').style.display = 'none';
-            }
-        }
-    </script>
 </body>
 </html>
