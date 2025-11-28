@@ -8,7 +8,8 @@ require_once __DIR__ . '/../Model/LivroDAO.php';
 //* Inclui o arquivo LivroDAO.php, que contém a classe de acesso a dados (DAO) para operações no banco de dados.
 //* __DIR__ representa o diretório atual deste arquivo, garantindo que o caminho seja resolvido corretamente independentemente do local de execução.
 
-require_once __DIR__ . '/./Model/Livro.php';
+require_once __DIR__ . '/../Model/Livro.php';
+
 //* Inclui o arquivo Livro.php, que define a classe Livro, representando a entidade de dados para um livro no sistema.
 
 class LivroController {
