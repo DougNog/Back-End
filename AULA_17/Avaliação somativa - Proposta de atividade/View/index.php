@@ -1,96 +1,41 @@
-<?php
-session_start();
-
-require_once __DIR__ . '/../Controller/LivroController.php';
-
-$controller = new LivroController();
-
-$acao = $_POST['acao'] ?? '';
-$editarLivro = null;
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    if ($acao === 'criar') {
-
-        $msg = $controller->criar(
-            trim($_POST['titulo']),
-            trim($_POST['autor']),
-            (int) $_POST['ano'],
-            trim($_POST['genero']),
-            (int) $_POST['quantidade']
-        );
-
-        $_SESSION['mensagem'] = $msg;
-
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-        exit;
-    }
-
-    if ($acao === 'deletar') {
-
-        $controller->deletar(trim($_POST['titulo']));
-        $_SESSION['mensagem'] = "Livro excluído com sucesso!";
-
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-        exit;
-    }
-
-    if ($acao === 'editar') {
-
-        $editarLivro = $controller->buscarPorTitulo(trim($_POST['titulo']));
-    }
-
-    if ($acao === 'atualizar') {
-
-        $msg = $controller->atualizar(
-            trim($_POST['titulo_original']),
-            trim($_POST['titulo']),
-            trim($_POST['autor']),
-            (int) $_POST['ano'],
-            trim($_POST['genero']),
-            (int) $_POST['quantidade']
-        );
-
-        $_SESSION['mensagem'] = $msg;
-
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-        exit;
-    }
-}
-
-$listaLivros = $controller->ler();
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Catálogo de Livros - Biblioteca Escolar</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Importa o CSS externo -->
 </head>
 <body>
 
 <div class="container">
+    <!-- Bloco principal da página -->
 
     <h1 id="titulo_principal">Catálogo de Livros - Biblioteca Escolar</h1>
     <hr>
 
-    <!-- Exibição das mensagens -->
+    <!-- Exibição de mensagens armazenadas na sessão -->
     <?php if (!empty($_SESSION['mensagem'])): ?>
         <p style="color:red; font-weight:bold; font-size:16px;">
             <?= htmlspecialchars($_SESSION['mensagem']); ?>
+            <!-- htmlspecialchars evita XSS -->
         </p>
         <?php unset($_SESSION['mensagem']); ?>
+        <!-- Apaga a mensagem após exibir (flash message) -->
     <?php endif; ?>
 
     <?php if ($editarLivro): ?>
+        <!-- SE estiver editando, exibe o formulário preenchido -->
 
         <form id="cadastro" method="POST">
-
             <input type="hidden" name="acao" value="atualizar">
+            <!-- Diz ao backend que este formulário é de atualização -->
 
             <input type="hidden" name="titulo_original"
                    value="<?= htmlspecialchars($editarLivro->getTitulo()) ?>">
+            <!-- Guarda o título original para localizar o registro -->
 
+            <!-- Campos preenchidos com os valores atuais -->
             <input type="text" name="titulo" required
                    placeholder="Título do livro"
                    value="<?= htmlspecialchars($editarLivro->getTitulo()) ?>">
@@ -112,14 +57,15 @@ $listaLivros = $controller->ler();
                    value="<?= htmlspecialchars($editarLivro->getQuantidade()) ?>">
 
             <button type="submit">Atualizar Livro</button>
-
+            <!-- Botão do modo edição -->
         </form>
 
     <?php else: ?>
 
+        <!-- Formulário padrão para cadastrar novo livro -->
         <form method="POST">
-
             <input type="hidden" name="acao" value="criar">
+            <!-- Indica ação de criação -->
 
             <input type="text" name="titulo" required placeholder="Título do livro">
             <input type="text" name="autor" required placeholder="Autor">
@@ -128,7 +74,6 @@ $listaLivros = $controller->ler();
             <input type="number" name="quantidade" required placeholder="Quantidade disponível">
 
             <button type="submit">Cadastrar Livro</button>
-
         </form>
 
     <?php endif; ?>
@@ -139,6 +84,7 @@ $listaLivros = $controller->ler();
 
     <table>
         <tr>
+            <!-- Cabeçalho da tabela -->
             <th>Título</th>
             <th>Autor</th>
             <th>Ano</th>
@@ -148,8 +94,11 @@ $listaLivros = $controller->ler();
         </tr>
 
         <?php if (!empty($listaLivros)): ?>
+            <!-- Se houver livros cadastrados... -->
+
             <?php foreach ($listaLivros as $livro): ?>
                 <tr>
+                    <!-- Exibe cada dado nas colunas -->
                     <td><?= htmlspecialchars($livro->getTitulo()) ?></td>
                     <td><?= htmlspecialchars($livro->getAutor()) ?></td>
                     <td><?= htmlspecialchars($livro->getAno()) ?></td>
@@ -157,13 +106,14 @@ $listaLivros = $controller->ler();
                     <td><?= htmlspecialchars($livro->getQuantidade()) ?></td>
 
                     <td class="actions">
-
+                        <!-- Botão editar -->
                         <form method="POST" style="display:inline;">
                             <input type="hidden" name="acao" value="editar">
                             <input type="hidden" name="titulo" value="<?= htmlspecialchars($livro->getTitulo()) ?>">
                             <button type="submit">Editar</button>
                         </form>
 
+                        <!-- Botão excluir com confirmação JS -->
                         <form method="POST" style="display:inline;">
                             <input type="hidden" name="acao" value="deletar">
                             <input type="hidden" name="titulo" value="<?= htmlspecialchars($livro->getTitulo()) ?>">
@@ -177,9 +127,12 @@ $listaLivros = $controller->ler();
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
+
+            <!-- Caso não haja livros -->
             <tr>
                 <td colspan="6" class="no-data">Nenhum livro cadastrado.</td>
             </tr>
+
         <?php endif; ?>
 
     </table>
