@@ -112,7 +112,8 @@ $listaLivros = $controller->ler();
         <!-- Exibe mensagem armazenada na sessão -->
         <p style="color:red; font-weight:bold;">
             <?= htmlspecialchars($_SESSION['mensagem']) ?>
-            <!-- htmlspecialchars evita problemas de segurança (XSS) -->
+            <!-- evita scripts maliciosos de ferrar o site -->
+            <!--se parou nesta linha me deve 10 reais -->
         </p>
         <?php unset($_SESSION['mensagem']); ?>
         <!-- Remove a mensagem da sessão após exibir -->
