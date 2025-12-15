@@ -1,64 +1,148 @@
 :root {
+  /** Define variáveis CSS globais (custom properties) acessíveis em todo o arquivo */
+
   --primary: #6a0dad;
+  /** Cor principal do sistema (roxo) */
+
   --secondary: #8a2be2;
+  /** Cor secundária usada em efeitos como hover */
+
   --danger: #e74c3c;
+  /** Cor reservada para ações de erro/exclusão */
+
   --warning: #f1c40f;
+  /** Cor reservada para avisos */
+
   --background: #f9fafc;
+  /** Cor de fundo geral das áreas claras */
+
   --card-bg: #ffffff;
+  /** Cor de fundo para cartões/blocos */
+
   --text: #2c3e50;
+  /** Cor padrão do texto */
+
   --border: #e5e7eb;
+  /** Cor padrão das bordas */
+
   --shadow: rgba(0, 0, 0, 0.1);
+  /** Sombra padrão usada em cartões e formulários */
 }
 
 #cadastro {
-    font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Estilização específica do formulário de cadastro */
+
+  font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Define a fonte principal com fallback para fontes monoespaçadas */
+
   background-color: var(--background);
+  /** Define a cor de fundo usando a variável global */
+
   padding: 20px;
+  /** Espaçamento interno do formulário */
+
   border-radius: 8px;
+  /** Arredonda os cantos do formulário */
+
   box-shadow: 0 4px 6px var(--shadow);
+  /** Aplica sombra para dar efeito de elevação */
+
   max-width: 600px;
+  /** Limita a largura máxima do formulário */
+
   margin: 40px auto;
+  /** Centraliza o formulário horizontalmente e adiciona espaço vertical */
 }
 
 #titulo_principal {
-    font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Estilização do título principal da página */
+
+  font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Define a fonte do título */
+
   text-align: center;
+  /** Centraliza o texto horizontalmente */
+
   color: var(--primary);
+  /** Aplica a cor principal ao título */
+
   margin-top: 20px;
+  /** Espaçamento superior do título */
 }
+
 h1, h2 {
-    font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Estilização comum para títulos h1 e h2 */
+
+  font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Mantém padrão visual consistente nos títulos */
+
   color: var(--primary);
+  /** Define a cor principal para os títulos */
 }
-
-
-
 
 button {
-    font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Estilização padrão dos botões */
+
+  font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Fonte consistente com o restante da interface */
+
   background-color: var(--primary);
+  /** Cor de fundo do botão */
+
   color: white;
+  /** Cor do texto do botão */
+
   padding: 10px 15px;
+  /** Espaçamento interno do botão */
+
   border: none;
+  /** Remove a borda padrão do botão */
+
   border-radius: 4px;
+  /** Arredonda levemente os cantos */
+
   cursor: pointer;
+  /** Altera o cursor para indicar ação clicável */
 }
 
 button:hover {
-    font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Estilo aplicado quando o mouse passa sobre o botão */
+
+  font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Mantém a mesma fonte no hover */
+
   background-color: var(--secondary);
+  /** Altera a cor de fundo para dar feedback visual */
 }
 
 table {
-    font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Estilização geral da tabela */
+
+  font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Fonte da tabela */
+
   width: 100%;
+  /** Faz a tabela ocupar toda a largura disponível */
+
   border-collapse: collapse;
+  /** Remove espaçamento entre bordas das células */
+
   margin-top: 20px;
+  /** Espaçamento superior da tabela */
 }
 
 th, td {
-    font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Estilização aplicada às células de cabeçalho (th) e dados (td) */
+
+  font-family: 'Monocraft', Consolas, 'Courier New', monospace;
+  /** Fonte consistente nas células */
+
   border: 1px solid var(--border);
+  /** Define borda usando a variável global */
+
   padding: 12px;
+  /** Espaçamento interno das células */
+
   text-align: left;
+  /** Alinha o texto à esquerda */
 }
