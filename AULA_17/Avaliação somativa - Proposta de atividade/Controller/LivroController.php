@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../Model/LivroDAO.php';
 //* Inclui o arquivo LivroDAO.php UMA vez (se já tiver sido incluído antes, não inclui de novo).
-//* __DIR__ pega o diretório atual deste arquivo, garantindo caminho absoluto e evitando erros por "caminho relativo".
+//* __DIR__ pega o diretório atual deste arquivo, evitando erros por "caminho relativo".
 
 require_once __DIR__ . '/../Model/Livro.php';
 //* Inclui o arquivo Livro.php UMA vez, para que a classe Livro exista e possa ser instanciada no controller.
