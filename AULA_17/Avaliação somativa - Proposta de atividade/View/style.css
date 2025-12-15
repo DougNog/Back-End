@@ -1,94 +1,64 @@
 :root {
-  --primary: #6a0dad;          /*** Cor principal (roxo), usada em títulos e botões */
-  --secondary: #8a2be2;        /*** Cor secundária (roxo mais claro), usada no hover do botão */
-  --danger: #e74c3c;           /*** Cor de perigo (vermelho) - não está usada neste trecho, mas fica disponível */
-  --warning: #f1c40f;          /*** Cor de alerta (amarelo) - também disponível para uso futuro */
-  --background: #f9fafc;       /*** Cor de fundo clara para o formulário/container */
-  --card-bg: #ffffff;          /*** Cor de fundo de cartões (branco) */
-  --text: #2c3e50;             /*** Cor padrão do texto (cinza escuro) */
-  --border: #e5e7eb;           /*** Cor padrão das bordas das tabelas e inputs */
-  --shadow: rgba(0, 0, 0, 0.1);/*** Sombra leve para dar profundidade a caixas */
+  --primary: #6a0dad;
+  --secondary: #8a2be2;
+  --danger: #e74c3c;
+  --warning: #f1c40f;
+  --background: #f9fafc;
+  --card-bg: #ffffff;
+  --text: #2c3e50;
+  --border: #e5e7eb;
+  --shadow: rgba(0, 0, 0, 0.1);
 }
 
 #cadastro {
     font-family: 'Monocraft', Consolas, 'Courier New', monospace;
-    /** Define a fonte monoespaçada para o formulário de cadastro */
   background-color: var(--background);
-  /** Aplica a cor de fundo clara definida em --background */
   padding: 20px;
-  /** Espaçamento interno de 20px em todos os lados */
   border-radius: 8px;
-  /** Cantos arredondados do formulário */
   box-shadow: 0 4px 6px var(--shadow);
-  /** Aplica sombra suave abaixo do formulário */
   max-width: 600px;
-  /** Largura máxima do formulário, evitando que fique muito grande em telas largas */
   margin: 40px auto;
-  /** 40px de margem em cima/baixo e auto nas laterais (centraliza horizontalmente) */
 }
 
 #titulo_principal {
     font-family: 'Monocraft', Consolas, 'Courier New', monospace;
-    /** Define a fonte monoespaçada para o título principal */
   text-align: center;
-  /** Centraliza o texto do título */
   color: var(--primary);
-  /** Usa a cor roxa principal para o texto */
   margin-top: 20px;
-  /** Espaço acima do título */
 }
-
 h1, h2 {
     font-family: 'Monocraft', Consolas, 'Courier New', monospace;
-    /** Define a mesma fonte monoespaçada para h1 e h2 */
   color: var(--primary);
-  /** Usa a cor principal nos títulos de nível 1 e 2 */
 }
 
-/** Espaço em branco (linhas vazias apenas para organização visual do CSS) */
+
+
 
 button {
     font-family: 'Monocraft', Consolas, 'Courier New', monospace;
-    /** Fonte monoespaçada para o texto dos botões */
   background-color: var(--primary);
-  /** Botão com cor de fundo roxa */
   color: white;
-  /** Texto do botão em branco para contraste */
   padding: 10px 15px;
-  /** Espaçamento interno: 10px vertical e 15px horizontal */
   border: none;
-  /** Remove a borda padrão do botão */
   border-radius: 4px;
-  /** Bordas levemente arredondadas */
   cursor: pointer;
-  /** Mostra o cursor de mãozinha ao passar por cima do botão */
 }
 
 button:hover {
     font-family: 'Monocraft', Consolas, 'Courier New', monospace;
-    /** Mantém a mesma fonte no estado hover */
   background-color: var(--secondary);
-  /** Altera a cor de fundo do botão para a cor secundária quando o mouse passa por cima */
 }
 
 table {
     font-family: 'Monocraft', Consolas, 'Courier New', monospace;
-    /** Fonte monoespaçada para o texto da tabela */
   width: 100%;
-  /** A tabela ocupa 100% da largura disponível do container */
   border-collapse: collapse;
-  /** Une as bordas das células, dando um visual mais limpo */
   margin-top: 20px;
-  /** Espaço acima da tabela, separando do conteúdo anterior */
 }
 
 th, td {
     font-family: 'Monocraft', Consolas, 'Courier New', monospace;
-    /** Mesma fonte monoespaçada nas células de cabeçalho e dados */
   border: 1px solid var(--border);
-  /** Borda fina usando a cor definida em --border */
   padding: 12px;
-  /** Espaço interno de 12px nas células */
   text-align: left;
-  /** Alinha o texto à esquerda dentro das células */
 }
